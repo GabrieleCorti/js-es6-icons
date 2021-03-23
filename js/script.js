@@ -196,7 +196,7 @@ AllCategory.forEach((item) => {
 });
 //filtro per classe le icone e le appendo 
 $("#type").change(function(){
-  const CategoryIconsColor = IconsColor.filter((item) => {
+  let categoryIconsColor = IconsColor.filter((item) => {
 
     const SelectValue = $("#type").val();
     if (item.category == SelectValue) {
@@ -204,11 +204,16 @@ $("#type").change(function(){
     }
   });
 
+  console.log($("#type").val());
   const IconsSpace = $(".icons");
 
   IconsSpace.html(" ");
+
+  if (categoryIconsColor.length == 0) {
+    categoryIconsColor = IconsColor;
+  }
   
-  CategoryIconsColor.forEach((item) => {
+  categoryIconsColor.forEach((item) => {
     const IconsSpace = $(".icons");
 
     //deconstrut per semplicità
@@ -224,5 +229,24 @@ $("#type").change(function(){
     IconsSpace.append(Template);
 
   });
+
+  if ($("#type").val() == " ") {
+    icons.forEach((item) => {
+      const IconsSpace = $(".icons");
+
+      //deconstrut per semplicità
+      const { family, prefix, name } = item;
+
+      //creo il template e lo stampo a schermo
+      const Template = `<div>
+      <i class="${family} ${prefix}${name}"></i>
+      <div class="title">${name}</div>
+    </div>
+  `;
+
+      IconsSpace.append(Template)
+
+    });
+  }
 });
 
