@@ -204,6 +204,10 @@ $("#type").change(function(){
     }
   });
 
+  const IconsSpace = $(".icons");
+
+  IconsSpace.html(" ");
+  
   CategoryIconsColor.forEach((item) => {
     const IconsSpace = $(".icons");
 
@@ -217,7 +221,7 @@ $("#type").change(function(){
       </div>
     `;
 
-    IconsSpace.append(Template)
+    IconsSpace.append(Template);
 
   });
 });
