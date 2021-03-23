@@ -184,3 +184,41 @@ IconsColor.forEach((item) => {
 
 });
 
+//Milestone 3
+// Creiamo una select con i tipi di icone e usiamola per filtrare le icone
+//prendo tutti i tipi e li appendo nella select
+AllCategory.forEach((item) => {
+  const SelectSpace = $("#type");
+
+  const Template = `<option value="${item}">${item}</option>`;
+
+  SelectSpace.append(Template);
+});
+//filtro per classe le icone e le appendo 
+$("#type").change(function(){
+  const CategoryIconsColor = IconsColor.filter((item) => {
+
+    const SelectValue = $("#type").val();
+    if (item.category == SelectValue) {
+      return item;
+    }
+  });
+
+  CategoryIconsColor.forEach((item) => {
+    const IconsSpace = $(".icons");
+
+    //deconstrut per semplicità
+    const { family, prefix, name, color } = item;
+
+    //creo il template e lo stampo a schermo
+    const Template = `<div>
+        <i class="${family} ${prefix}${name}" style="color: ${color}"></i>
+        <div class="title">${name}</div>
+      </div>
+    `;
+
+    IconsSpace.append(Template)
+
+  });
+});
+
