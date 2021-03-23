@@ -167,22 +167,7 @@ const IconsColor = icons.map((item) => {
 
 });
 //stampo a schermo le icone colorate con il codice scritto in precendenza ma modificando il tmplate.
-IconsColor.forEach((item) => {
-  const IconsSpace = $(".icons");
-
-  //deconstrut per semplicità
-  const { family, prefix, name, color } = item;
-
-  //creo il template e lo stampo a schermo
-  const Template = `<div>
-      <i class="${family} ${prefix}${name}" style="color: ${color}"></i>
-      <div class="title">${name}</div>
-    </div>
-  `;
-
-  IconsSpace.append(Template)
-
-});
+printTheElements(IconsColor);
 
 //Milestone 3
 // Creiamo una select con i tipi di icone e usiamola per filtrare le icone
@@ -203,8 +188,8 @@ $("#type").change(function(){
       return item;
     }
   });
-
-  console.log($("#type").val());
+//elimino le icone prima di appendere quelle nuove
+//console.log($("#type").val());
   const IconsSpace = $(".icons");
 
   IconsSpace.html(" ");
@@ -213,7 +198,12 @@ $("#type").change(function(){
     categoryIconsColor = IconsColor;
   }
   
-  categoryIconsColor.forEach((item) => {
+  printTheElements(categoryIconsColor);
+
+});
+
+function printTheElements(arr){
+  arr.forEach((item) => {
     const IconsSpace = $(".icons");
 
     //deconstrut per semplicità
@@ -229,24 +219,4 @@ $("#type").change(function(){
     IconsSpace.append(Template);
 
   });
-
-  if ($("#type").val() == " ") {
-    icons.forEach((item) => {
-      const IconsSpace = $(".icons");
-
-      //deconstrut per semplicità
-      const { family, prefix, name } = item;
-
-      //creo il template e lo stampo a schermo
-      const Template = `<div>
-      <i class="${family} ${prefix}${name}"></i>
-      <div class="title">${name}</div>
-    </div>
-  `;
-
-      IconsSpace.append(Template)
-
-    });
-  }
-});
-
+}
